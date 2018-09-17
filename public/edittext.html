@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>写博客</title>
+</head>
+
+<body>
+    <div id='app'>
+        标题:
+        <input type="text" v-model:value='title'><br>
+        作者:
+        <input type="text" v-model:value="author"><br>
+        <textarea cols="30" rows="10" v-model:value='content'></textarea>
+        <button v-on:click='submit'>提交</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                title: '',
+                author: '',
+                content: ''
+            },
+            methods: {
+                submit() {
+                    console.log(this.title);
+                    if (!this.title) {
+                        alert('请填写标题')
+                        return;
+                    } else if (!this.author) {
+                        alert('请填写作者')
+                        return;
+                    } else if (!this.content) {
+                        alert('请填写内容')
+                        return;
+                    }
+                    axios.post('/article', { title: this.title, author: this.author, content: this.content }).then(res => {
+                        if (res.data === 'no') {
+                            alert('上传失败')
+                        } else {
+                            alert('上传成功')
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>blog</title>
+    <style>
+        .article-container {
+            border: 1px solid black;
+        }
+        .button-container{
+            height: 30px;
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+        <div v-for='article in articles' class="article-container">
+            <div>标题:{{article.articletitle}}</div>
+            <div style='font-size: 12px;margin: 10px 0;'>作者:{{article.articleauthor}}</div>
+            <div>内容:{{article.articlecontent}}</div>
+        </div>
+        <div class="button-container">
+            <a href="/edittext.html">写博客</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                articles: []
+            },
+            mounted() {
+                axios.get('/getArticle').then(res => {
+                    console.log(res);
+                    this.articles = res.data;
+                })
+            },
+            methods: {
+                toArticle(e) {
+                    console.log(e);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
