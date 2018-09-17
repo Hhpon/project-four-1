@@ -7,15 +7,13 @@ const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-app.post('/article', async (req, res) => {
+app.post('/article', (req, res) => {
 
-    const article = new Article({
-        articletitle: req.body.title,
-        articleauthor: req.body.author,
-        articlecontent: req.body.content
-    })
-
-    article.save((err, doc) => {
+    Article.create({
+        articleTitle: req.body.title,
+        articleAuthor: req.body.author,
+        articleContent: req.body.content
+    }, (err, doc) => {
         if (err) {
             res.end('no')
         } else {
