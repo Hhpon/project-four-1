@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>写博客</title>
+  <style>
+    #blogContent {
+      resize: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <span>标题：</span>
+      <input v-model="title" type="text">
+    </div>
+    <div>
+      <span>作者：</span>
+      <input v-model="author" type="text">
+    </div>
+    <div>
+      <textarea v-model="content" name="" id="blogContent" cols="40" rows="20"></textarea>
+    </div>
+
+    <button v-on:click="submit">保存</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        title: "",
+        author: "",
+        content: "",
+      },
+      methods: {
+        submit() {
+          // console.log(this.title);
+          // console.log(this.author);
+          // console.log(this.content);
+          var blogData = {
+            title: this.title,
+            author: this.author,
+            content: this.content
+          };
+          // console.log(blogData);
+          axios.post("http://localhost:3000/article", blogData).then(
+            function (res) {
+              // console.log(res);
+              if (res.data === "ok") {
+                // console.log("success");
+                location.href = "./blogLists.html";
+              } else {
+                alert('提交失败，请稍后再试');
+              }
+            }
+          )
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

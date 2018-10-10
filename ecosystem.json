@@ -1,0 +1,28 @@
+{
+    "apps:": [
+        {
+            "name": "blog",
+            "script": "index.js",
+            "env": {
+                "COMMON_VARIABLE": "true"
+            },
+            "env_production": {
+                "NODE_ENV": "blog"
+            }
+        }
+    ],
+    "deploy": {
+        "blog": {
+            "user": "hhp",
+            "host": "47.94.210.206",
+            "port": "1221",
+            "ref": "origin/master",
+            "repo": "git@github.com:Hhpon/project-four-1.git",
+            "path": "/home/hhp/www/website/blog",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "env": {
+                "NODE_ENV": "blog"
+            }
+        }
+    }
+}
