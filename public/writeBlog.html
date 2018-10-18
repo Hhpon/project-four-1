@@ -42,24 +42,20 @@
       },
       methods: {
         submit() {
-          // console.log(this.title);
-          // console.log(this.author);
-          // console.log(this.content);
           var blogData = {
             title: this.title,
             author: this.author,
             content: this.content
           };
-          // console.log(blogData);
-          axios.post("http://localhost:3000/article", blogData).then(
+          axios.post("http://www.hhp.im/article", blogData).then(
             function (res) {
-              // console.log(res);
-              if (res.data === "ok") {
+              console.log(res);
+              // if (res.data === "ok") {
                 // console.log("success");
-                location.href = "./blogLists.html";
-              } else {
-                alert('提交失败，请稍后再试');
-              }
+              //   location.href = "./blogLists.html";
+              // } else {
+              //   alert('提交失败，请稍后再试');
+              // }
             }
           )
         }
