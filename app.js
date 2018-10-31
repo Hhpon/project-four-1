@@ -45,7 +45,7 @@ app.get('/getArticle', (req, res) => {
 })
 
 app.get('/getNum', (req, res) => {
-    res.end(1);
+    res.end('1');
 })
 
 app.listen(3000, () => console.log('服务器正在监听 3000 端口'));
